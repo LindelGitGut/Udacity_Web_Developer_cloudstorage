@@ -40,4 +40,8 @@ public class UserService {
     public void deleteUser(String username){
         userMapper.deleteUser(username);
     }
+
+    public void changeUser(UserModel user){
+        userMapper.updateUser(user);
+    }
 }
