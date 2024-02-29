@@ -15,7 +15,7 @@ public class SignupPageObject {
     }
     @FindBy(id = "success-msg")
     WebElement successMsg;
-    @FindBy(className = "alert.alert-danger")
+    @FindBy(css = ".alert.alert-danger")
     WebElement errormsg;
     @FindBy(id = "inputFirstName")
     WebElement inputFirstName;

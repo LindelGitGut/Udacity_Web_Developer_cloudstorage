@@ -59,6 +59,20 @@ public class RegistrationAndLoginTests {
     }
 
     @Test
+    void userRegistrationFailedTest(){
+        LoginPageObject loginPage = new LoginPageObject(this.webDriver);
+        loginPage.clickRegistrationLink();
+        SignupPageObject signupPage = new SignupPageObject(this.webDriver);
+        signupPage.inputFirstname("Alex");
+        signupPage.inputLastName("Lindele");
+        signupPage.inputUsername("Alex");
+        signupPage.inputPassword("password");
+        signupPage.clickRegister();
+        assertEquals(null, signupPage.getSuccessMsg());
+        assertNotNull(signupPage.getErrorMsg());
+    }
+
+    @Test
     void userLoginTest(){
         LoginPageObject loginPage = new LoginPageObject(this.webDriver);
         loginPage.inputUserName("Alex");
