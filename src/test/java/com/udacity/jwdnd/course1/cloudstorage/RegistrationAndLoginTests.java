@@ -5,10 +5,7 @@ import com.udacity.jwdnd.course1.cloudstorage.PageObjects.LoginPageObject;
 import com.udacity.jwdnd.course1.cloudstorage.PageObjects.SignupPageObject;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -35,6 +32,11 @@ public class RegistrationAndLoginTests {
         WebDriverManager.chromedriver().clearDriverCache();
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
+    }
+
+    @AfterAll
+    static void closeBrowserPage(){
+        webDriver.close();
     }
 
     @BeforeEach
