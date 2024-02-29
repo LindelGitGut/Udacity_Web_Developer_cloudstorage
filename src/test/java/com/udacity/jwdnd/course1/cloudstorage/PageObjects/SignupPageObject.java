@@ -47,9 +47,16 @@ public class SignupPageObject {
         this.signupButton.click();
     }
     public String getErrorMsg() {
-        return this.errormsg.getText();
+        try{
+        return this.errormsg.getText();}
+        catch (Exception e){
+            return null;
+        }
     }
     public String getSuccessMsg() {
-        return this.successMsg.getText();
+        try {
+            return this.successMsg.getText();
+        }
+        catch (Exception e){return null;}
     }
 }
