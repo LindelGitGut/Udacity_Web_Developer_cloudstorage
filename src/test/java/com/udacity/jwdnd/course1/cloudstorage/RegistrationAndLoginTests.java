@@ -5,7 +5,9 @@ import com.udacity.jwdnd.course1.cloudstorage.PageObjects.LoginPageObject;
 import com.udacity.jwdnd.course1.cloudstorage.PageObjects.SignupPageObject;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,17 +24,21 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RegistrationAndLoginTests {
     @LocalServerPort
-    String port;
+    Integer port;
 
 
-    WebDriver webDriver;
+    static WebDriver webDriver;
 
     @BeforeAll
-    void beforeAll(){
+    static void beforeAll(){
         WebDriverManager.chromedriver().clearPreferences();
         WebDriverManager.chromedriver().clearCache();
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
+    }
+
+    @BeforeEach
+    void openStartPage(){
         webDriver.get("http://localhost:"+port+"/login");
     }
 
