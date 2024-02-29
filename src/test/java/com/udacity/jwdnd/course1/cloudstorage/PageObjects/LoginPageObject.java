@@ -33,7 +33,30 @@ public class LoginPageObject {
     @FindBy(id = "registrationlink")
     WebElement registrationLink;
 
+    public void clickRegistrationLink() {
+        registrationLink.click();
+    }
 
+    public void inputUserName(String username) {
+        usernameInput.clear();
+        usernameInput.sendKeys(username);
+    }
 
+    public void inputPassword(String password) {
+        usernameInput.clear();
+        passwordInput.sendKeys(password);
+    }
+
+    public void clickLoginButton() {
+        loginButton.click();
+    }
+
+    public String getErrorMsg() {
+        return this.invalidCredentialsMessage.getText();
+    }
+
+    public String getLogOutMsg() {
+        return this.logoutMessage.getText();
+    }
 
 }

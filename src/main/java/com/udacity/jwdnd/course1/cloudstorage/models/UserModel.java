@@ -11,12 +11,13 @@ public class UserModel {
     }
 
 
-    Integer userid ;
-    String username;
-    String salt;
-    String password;
-    String firstname;
-    String lastname;
+   private Integer userid;
+    private String username;
+    private String salt;
+    private String password;
+    private String firstname;
+    private String lastname;
+
 
     public Integer getUserid() {
         return userid;
