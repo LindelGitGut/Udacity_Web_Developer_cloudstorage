@@ -3,7 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage;
 import java.time.Duration;
 import com.udacity.jwdnd.course1.cloudstorage.PageObjects.LoginPageObject;
 import com.udacity.jwdnd.course1.cloudstorage.PageObjects.SignupPageObject;
-import io.github.bonigarcia.wdm.ChromeDriverManager;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,8 +31,8 @@ public class RegistrationAndLoginTests {
 
     @BeforeAll
     static void beforeAll(){
-        WebDriverManager.chromedriver().clearPreferences();
-        WebDriverManager.chromedriver().clearCache();
+        WebDriverManager.chromedriver().clearResolutionCache();
+        WebDriverManager.chromedriver().clearDriverCache();
         WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
     }
