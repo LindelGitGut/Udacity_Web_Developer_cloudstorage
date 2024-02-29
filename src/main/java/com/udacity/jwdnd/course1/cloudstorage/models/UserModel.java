@@ -2,8 +2,15 @@ package com.udacity.jwdnd.course1.cloudstorage.models;
 
 public class UserModel {
 
+    public UserModel(String username, String salt, String password, String firstname, String lastname) {
+        this.username = username;
+        this.salt = salt;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
 
-    //TODO Check if Constructor is needed
+
     Integer userid ;
     String username;
     String salt;
