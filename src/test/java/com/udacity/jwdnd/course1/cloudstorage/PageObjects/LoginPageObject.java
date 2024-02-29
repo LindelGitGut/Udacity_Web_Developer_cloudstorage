@@ -15,10 +15,10 @@ public class LoginPageObject {
     }
 
 
-    @FindBy(className = "alert.alert-danger")
+    @FindBy(css = ".alert.alert-danger")
     WebElement invalidCredentialsMessage;
 
-    @FindBy(className = "alert.alert-dark")
+    @FindBy(css = ".alert.alert-dark")
     WebElement logoutMessage;
 
     @FindBy(id = "inputUsername")
@@ -43,7 +43,7 @@ public class LoginPageObject {
     }
 
     public void inputPassword(String password) {
-        usernameInput.clear();
+        passwordInput.clear();
         passwordInput.sendKeys(password);
     }
 
@@ -52,11 +52,16 @@ public class LoginPageObject {
     }
 
     public String getErrorMsg() {
-        return this.invalidCredentialsMessage.getText();
+        try{
+        return this.invalidCredentialsMessage.getText();}
+        catch (Exception e){
+            System.out.println("Debug LoginPageObject getErrorMSG: " +e.getMessage());return null;}
     }
 
     public String getLogOutMsg() {
-        return this.logoutMessage.getText();
+        try{return this.logoutMessage.getText();}
+        catch (Exception e){return null;}
+
     }
 
 }
