@@ -51,6 +51,7 @@ public class RegistrationAndLoginTests {
         signupPage.inputLastName("Lindele");
         signupPage.inputUsername("Alex");
         signupPage.inputPassword("password");
+        signupPage.clickRegister();
         assertNotNull(signupPage.getSuccessMsg());
         assertEquals(null,signupPage.getErrorMsg());
     }
