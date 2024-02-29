@@ -69,4 +69,14 @@ public class RegistrationAndLoginTests {
         webDriverWait.until(ExpectedConditions.titleIs("Home"));
     }
 
+    @Test
+    void wrongUserTest() throws InterruptedException {
+        LoginPageObject loginPage = new LoginPageObject(this.webDriver);
+        loginPage.inputUserName("WrongUserName");
+        loginPage.inputPassword("meh");
+        loginPage.clickLoginButton();
+        Thread.sleep(100);
+        assertNotNull(loginPage.getErrorMsg());
+    }
+
 }
