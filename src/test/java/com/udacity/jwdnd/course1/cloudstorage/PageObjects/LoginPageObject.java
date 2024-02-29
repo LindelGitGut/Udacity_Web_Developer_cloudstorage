@@ -15,10 +15,10 @@ public class LoginPageObject {
     }
 
 
-    @FindBy(className = "alert alert-danger")
+    @FindBy(className = "alert.alert-danger")
     WebElement invalidCredentialsMessage;
 
-    @FindBy(className = "alert alert-dark")
+    @FindBy(className = "alert.alert-dark")
     WebElement logoutMessage;
 
     @FindBy(id = "inputUsername")
