@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage;
 
 
 import com.udacity.jwdnd.course1.cloudstorage.PageObjects.LoginPageObject;
+import com.udacity.jwdnd.course1.cloudstorage.PageObjects.SignupPageObject;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,7 +32,12 @@ public class RegistrationAndLoginTests {
     @Test
     void userRegistrationTest(){
         LoginPageObject loginPage = new LoginPageObject(this.webDriver);
-        loginPage.
+        loginPage.clickRegistrationLink();
+
+        SignupPageObject signupPage = new SignupPageObject(this.webDriver);
+
+        signupPage.
+
 
     }
 
