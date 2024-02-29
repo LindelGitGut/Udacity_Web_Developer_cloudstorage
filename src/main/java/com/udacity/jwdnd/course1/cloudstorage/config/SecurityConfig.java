@@ -29,6 +29,7 @@ public class SecurityConfig {
             http.formLogin(config -> config
                     .loginPage("/login")
                     .defaultSuccessUrl("/home")
+                    .failureForwardUrl("/login?error")
             );
 
 
