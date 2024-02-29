@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     @GetMapping
-    String getLoginPage(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout", required = false) String logout, Model model) {
+    String getLoginPage(@RequestParam(value = "logout", required = false) String logout, Model model) {
 
         if (logout != null) {
             model.addAttribute("logout", true);
         }
 
-        if (error != null) {
-            model.addAttribute("loginerror", true);
-        }
 
         return "login";
     }
