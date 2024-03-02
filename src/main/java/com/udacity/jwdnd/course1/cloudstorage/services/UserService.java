@@ -3,6 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.UserMapper;
 import com.udacity.jwdnd.course1.cloudstorage.models.UserModel;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -11,11 +12,13 @@ import java.util.Base64;
 @Service
 public class UserService {
 
+
     UserMapper userMapper;
     HashService hashService;
-    public UserService(UserMapper userMapper, HashService hashService) {
+    public UserService(UserMapper userMapper, HashService hashService, AuthenticationService authenticationService) {
         this.userMapper = userMapper;
         this.hashService = hashService;
+
     }
 
 
@@ -37,6 +40,10 @@ public class UserService {
         return userMapper.getUser(username);
     }
 
+    public UserModel getCurrentUser(Authentication authentication){
+       return userMapper.getUser(authentication.getName());
+    }
+
     public void deleteUser(String username){
         userMapper.deleteUser(username);
     }
@@ -44,4 +51,5 @@ public class UserService {
     public void changeUser(UserModel user){
         userMapper.updateUser(user);
     }
+
 }
