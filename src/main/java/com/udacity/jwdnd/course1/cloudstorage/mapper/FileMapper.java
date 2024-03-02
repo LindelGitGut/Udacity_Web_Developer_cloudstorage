@@ -7,7 +7,7 @@ import java.io.File;
 
 @Mapper
 public interface FileMapper {
-    //TODO Implement Mapper
+    //TODO check sanity
 
     //CREATE
     @Insert("INSERT INTO FILES (filename, contenttype, filesize, userid, BLOB)"+
@@ -16,7 +16,7 @@ public interface FileMapper {
 
     //READ
     @Select("SELECT * FROM FILES WHERE fileId = #{fileId}")
-    FileModel getFile(Integer fileId);
+    FileModel getFile(String fileId);
 
     //UPDATE
     @Update("UPDATE FILES SET (fileId = #{fileId}, filename = #{filename}, conetenttype = #{contenttype}, filesize = #{filesize}, userid = #{userid}, BLOB = #{BLOB})")
