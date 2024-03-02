@@ -3,27 +3,33 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
 import com.udacity.jwdnd.course1.cloudstorage.models.FileModel;
+import com.udacity.jwdnd.course1.cloudstorage.models.UserModel;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FileService {
 
     FileMapper fileMapper;
+    UserService userService;
 
-    public FileService(FileMapper fileMapper) {
+    public FileService(FileMapper fileMapper, UserService userService) {
         this.fileMapper = fileMapper;
+        this.userService = userService;
     }
 
     public Integer createFile(FileModel file){
-       return fileMapper.createFile(file);
+        UserModel user = userService.getCurrentUser();
+        return fileMapper.createFile(new FileModel(null,file.getFilename(),file.getContenttype(),file.getFilesize(),user.getUserid(), file.getBLOB()));
     }
 
     public FileModel getFile(String fileid){
-       return fileMapper.getFile(fileid);
+        UserModel user = userService.getCurrentUser();
+        return fileMapper.getFile(fileid, user.getUserid().toString());
     }
 
     public Integer changeFile(FileModel file){
-        return fileMapper.updateFile(file);
+        UserModel user = userService.getCurrentUser();
+        return fileMapper.updateFile(file, user.getUserid().toString());
     }
 
     public Integer removeFile(FileModel file){

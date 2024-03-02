@@ -15,12 +15,12 @@ public interface FileMapper {
     Integer createFile(FileModel file);
 
     //READ
-    @Select("SELECT * FROM FILES WHERE fileId = #{fileId}")
-    FileModel getFile(String fileId);
+    @Select("SELECT * FROM FILES WHERE fileId = #{fileId} AND userid = #{userid}")
+    FileModel getFile(String fileId, String userid);
 
     //UPDATE
-    @Update("UPDATE FILES SET (fileId = #{fileId}, filename = #{filename}, conetenttype = #{contenttype}, filesize = #{filesize}, userid = #{userid}, BLOB = #{BLOB})")
-    Integer updateFile(FileModel file);
+    @Update("UPDATE FILES SET (fileId = #{fileId}, filename = #{filename}, conetenttype = #{contenttype}, filesize = #{filesize}, userid = #{userID}, BLOB = #{BLOB})")
+    Integer updateFile(FileModel file, String userID);
 
     //REMOVE
     @Delete("DELETE * FROM FILES WHERE fileId = #{fileId}")

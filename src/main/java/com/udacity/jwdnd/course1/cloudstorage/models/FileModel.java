@@ -16,6 +16,14 @@ public class FileModel {
     //TODO Check if File is the Righ Datatype corresponding to BloB (see schema.sql)
     File BLOB;
 
+    public FileModel(Integer fileId, String filename, String contenttype, String filesize, Integer userid, File BLOB) {
+        this.fileId = fileId;
+        this.filename = filename;
+        this.contenttype = contenttype;
+        this.filesize = filesize;
+        this.userid = userid;
+        this.BLOB = BLOB;
+    }
 
     public Integer getFileId() {
         return fileId;
