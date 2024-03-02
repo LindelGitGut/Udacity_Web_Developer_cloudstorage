@@ -1,6 +1,8 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
 import java.time.Duration;
+
+import com.udacity.jwdnd.course1.cloudstorage.PageObjects.HomePageObject;
 import com.udacity.jwdnd.course1.cloudstorage.PageObjects.LoginPageObject;
 import com.udacity.jwdnd.course1.cloudstorage.PageObjects.SignupPageObject;
 
@@ -73,7 +75,7 @@ public class RegistrationAndLoginTests {
     }
 
     @Test
-    void userLoginTest(){
+    void userLoginTest() throws InterruptedException {
         LoginPageObject loginPage = new LoginPageObject(this.webDriver);
         loginPage.inputUserName("Alex");
         loginPage.inputPassword("password");
@@ -81,6 +83,35 @@ public class RegistrationAndLoginTests {
         //TODO Complete test with checking HomepageElements
         WebDriverWait webDriverWait = new WebDriverWait(webDriver, Duration.ofMillis(2000));
         webDriverWait.until(ExpectedConditions.titleIs("Home"));
+        HomePageObject homePageObject = new HomePageObject(webDriver);
+        Thread.sleep(1000);
+        assertEquals("Home", homePageObject.getHomeTitle());
+    }
+
+    @Test
+    void userLoginAndLogoutTest(){
+        LoginPageObject loginPageObject = new LoginPageObject(webDriver);
+        loginPageObject.inputUserName("Alex");
+        loginPageObject.inputPassword("password");
+        loginPageObject.clickLoginButton();
+        WebDriverWait webDriverWait = new WebDriverWait(webDriver, Duration.ofMillis(2000));
+        webDriverWait.until(ExpectedConditions.titleIs("Home"));
+        HomePageObject homePageObject = new HomePageObject(webDriver);
+
+        homePageObject.clickLogoutButton();
+
+        webDriverWait.until(ExpectedConditions.titleIs("Login"));
+
+        assertNotNull(loginPageObject.getLogOutMsg());
+
+    }
+
+    @Test
+
+    void homePageWithoutAuthenticationTest(){
+        webDriver.get("http://localhost:8080/home");
+
+
     }
 
     @Test
