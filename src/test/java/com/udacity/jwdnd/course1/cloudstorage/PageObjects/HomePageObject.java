@@ -15,16 +15,28 @@ public class HomePageObject {
         PageFactory.initElements(webDriver, this);
     }
 
-    @FindBy(css = "title")
+    @FindBy(tagName = "title")
     WebElement title;
 
-    @FindBy(className = "btn btn-secondary float-right")
+    @FindBy(css = ".btn.btn-secondary.float-right")
     WebElement logoutButton;
 
 
+    public void clickLogoutButton() {
+        logoutButton.click();
+    }
+
+    public String getHomeTitle() {
+        try {
+            return this.title.getText();
+        } catch (Exception e) {
+            System.out.println("Debug get Title Exception: " +e.getMessage() );
+            return null;
+        }
+    }
+
 
     //TODO Complete Selenium Page
-
 
 
 }
