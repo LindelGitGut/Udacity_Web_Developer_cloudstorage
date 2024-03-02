@@ -28,6 +28,8 @@ public class AuthenticationService implements AuthenticationProvider {
         this.hashService = hashService;
     }
 
+
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         System.out.println("Authentication wird ausgeführt");
