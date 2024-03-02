@@ -34,7 +34,7 @@ public class AuthenticationService implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        System.out.println("Debugging Username" + username + " PAsswort" + password);
+        //System.out.println("Debugging Username" + username + " PAsswort" + password);
 
         UserModel user = userService.getUser(username);
 
