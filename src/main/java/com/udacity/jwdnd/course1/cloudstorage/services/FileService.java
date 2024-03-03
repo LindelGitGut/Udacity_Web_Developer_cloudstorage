@@ -6,6 +6,8 @@ import com.udacity.jwdnd.course1.cloudstorage.models.FileModel;
 import com.udacity.jwdnd.course1.cloudstorage.models.UserModel;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FileService {
 
@@ -32,6 +34,10 @@ public class FileService {
         return fileMapper.updateFile(file, user.getUserid().toString());
     }
 
+    public List<FileModel> getCurretUserFiles(){
+        UserModel curretUser = userService.getCurrentUser();
+        return this.fileMapper.getAllUserFiles(curretUser.getUserid().toString());
+    }
     public Integer removeFile(FileModel file){
         return fileMapper.removeFile(file);
     }

@@ -4,6 +4,7 @@ import com.udacity.jwdnd.course1.cloudstorage.models.FileModel;
 import org.apache.ibatis.annotations.*;
 
 import java.io.File;
+import java.util.List;
 
 @Mapper
 public interface FileMapper {
@@ -27,6 +28,6 @@ public interface FileMapper {
     Integer removeFile(FileModel file);
 
     @Select("SELECT * FROM FILES WHERE userid = #{userid}")
-    FileModel getAllUserFiles(String userid);
+    List<FileModel> getAllUserFiles(String userid);
 
 }
