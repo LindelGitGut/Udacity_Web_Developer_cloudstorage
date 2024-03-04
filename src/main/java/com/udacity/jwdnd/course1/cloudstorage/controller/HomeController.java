@@ -29,29 +29,30 @@ public class HomeController {
     //handling File Upload
     @PostMapping
     String fileUpload(@RequestParam("fileUpload") MultipartFile file, Model model) throws IOException {
+
+        // Fileupload
         String filename = file.getOriginalFilename();
         String contentype = file.getContentType();
         String filesize = "" + file.getSize();
         Integer userid = userService.getCurrentUser().getUserid();
         byte[] BLOB = file.getBytes();
 
-        fileService.createFile(new FileModel(null,filename,contentype,filesize,userid,BLOB));
+        if(fileService.createFile(new FileModel(null,filename,contentype,filesize,userid,BLOB)) != null){
 
-
-        model.addAttribute("allFiles", fileService.getCurretUserFiles());
-
-        System.out.println("Debug HomeController Fileupload" +
-                " Filename: " + filename +" contenttype: " + contentype+ " filesize:" + filesize+ " userid:" +userid);
-
-
-
-        return "home";
+            model.addAttribute("allFiles", fileService.getCurretUserFiles());
+            model.addAttribute("success", true);
+            return "result";
+        }
+        else {model.addAttribute("error", true);
+        model.addAttribute("errormsg", "File with same name already exist, please try again with other Filename");
+        return "result";}
     }
 
 
     @GetMapping
-    String getHomepage(){
+    String getHomepage(Model model){
 
+        model.addAttribute("allFiles", fileService.getCurretUserFiles());
         return "home";
     }
 

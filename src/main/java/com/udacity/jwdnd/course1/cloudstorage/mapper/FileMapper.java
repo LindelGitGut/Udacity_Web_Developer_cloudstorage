@@ -8,16 +8,20 @@ import java.util.List;
 
 @Mapper
 public interface FileMapper {
-    //TODO check sanity
 
     //CREATE
     @Insert("INSERT INTO FILES (filename, contenttype, filesize, userid, filedata)"+
     "VALUES(#{filename}, #{contenttype}, #{filesize}, #{userid}, #{filedata})")
     Integer createFile(FileModel file);
 
+
     //READ
     @Select("SELECT * FROM FILES WHERE fileId = #{fileId} AND userid = #{userid}")
     FileModel getFile(String fileId, String userid);
+
+    //READ
+    @Select("SELECT * FROM FILES WHERE filename = #{filename} AND userid = #{userid}")
+    FileModel getFileByName(String filename, String userid);
 
     //UPDATE
     @Update("UPDATE FILES SET (fileId = #{fileId}, filename = #{filename}, conetenttype = #{contenttype}, filesize = #{filesize}, userid = #{userID}, filedata = #{filedata})")
