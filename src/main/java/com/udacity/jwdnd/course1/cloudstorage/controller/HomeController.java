@@ -30,27 +30,57 @@ public class HomeController {
     @PostMapping
     String fileUpload(@RequestParam("fileUpload") MultipartFile file, Model model) throws IOException {
 
-        // Fileupload
-        String filename = file.getOriginalFilename();
-        String contentype = file.getContentType();
-        String filesize = "" + file.getSize();
-        Integer userid = userService.getCurrentUser().getUserid();
-        byte[] BLOB = file.getBytes();
+        if (file != null) {
+            // Fileupload
+            String filename = file.getOriginalFilename();
+            String contentype = file.getContentType();
+            String filesize = "" + file.getSize();
+            Integer userid = userService.getCurrentUser().getUserid();
+            byte[] BLOB = file.getBytes();
 
-        if(fileService.createFile(new FileModel(null,filename,contentype,filesize,userid,BLOB)) != null){
+            if (fileService.createFile(new FileModel(null, filename, contentype, filesize, userid, BLOB)) != null) {
 
-            model.addAttribute("allFiles", fileService.getCurretUserFiles());
-            model.addAttribute("success", true);
-            return "result";
+                model.addAttribute("allFiles", fileService.getCurretUserFiles());
+                model.addAttribute("success", true);
+                return "result";
+            } else {
+                model.addAttribute("error", true);
+                model.addAttribute("errormsg", "File with same name already exist, please try again with other Filename");
+                return "result";
+            }
         }
-        else {model.addAttribute("error", true);
-        model.addAttribute("errormsg", "File with same name already exist, please try again with other Filename");
-        return "result";}
+
+
+        //TODO Remove Home as placeholder
+        return "home";
     }
+    // End Fileupload
 
 
     @GetMapping
-    String getHomepage(Model model){
+    String getHomepage(Model model,
+
+                       @RequestParam(value = "deletefile",required = false) String deleteFileID,
+                       @RequestParam(value = "downloadfile",required = false) String downloadFileID){
+
+
+
+        if (deleteFileID != null){
+            System.out.println("Debug deleteFile Controller getriggert");
+            fileService.removeFile(deleteFileID);
+            model.addAttribute("allFiles", fileService.getCurretUserFiles());
+        }
+        if (downloadFileID != null){
+            System.out.println("Debug downloadfile getriggert");
+            FileModel downloadfile = fileService.getFile(downloadFileID);
+            if(downloadfile == null){
+                System.out.println("Debug Downloadfile, File konnte nicht gefunden werden");
+            }
+
+            else {
+                System.out.println("Debug Download File, File gefunden");
+            }
+        }
 
         model.addAttribute("allFiles", fileService.getCurretUserFiles());
         return "home";

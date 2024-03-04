@@ -46,7 +46,7 @@ public class FileService {
         UserModel curretUser = userService.getCurrentUser();
         return this.fileMapper.getAllUserFiles(curretUser.getUserid().toString());
     }
-    public Integer removeFile(FileModel file){
-        return fileMapper.removeFile(file);
+    public Integer removeFile(String fileId){
+        return fileMapper.removeFile(fileId);
     }
 }
