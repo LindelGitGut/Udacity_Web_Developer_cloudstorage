@@ -133,6 +133,22 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/home/note")
+    String getNote(@ModelAttribute("noteModel") NoteModel noteModel, Model model, @RequestParam(value = "deleteNoteID", required = false) String deleteNoteID){
+
+        //Edit Note
+
+        if(deleteNoteID != null){
+            System.out.println("Debug deleteNoteID: " + deleteNoteID);
+            noteService.deleteNote(deleteNoteID);
+        }
+
+        model.addAttribute("allNotes", noteService.getAllUserNotes());
+        //TODO abfragen ob erfolgreich oder nicht und entsprechend der result Page anzeigen
+
+        return "home";
+    }
+
 }
 
 
