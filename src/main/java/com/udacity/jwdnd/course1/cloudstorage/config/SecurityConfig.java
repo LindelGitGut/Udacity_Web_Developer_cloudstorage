@@ -29,9 +29,7 @@ public class SecurityConfig {
             http.formLogin(config -> config
                     .loginPage("/login")
                     .defaultSuccessUrl("/home")
-
             );
-
 
 
             //redirection to login Page TODO check whhich parameter should be set
@@ -40,6 +38,8 @@ public class SecurityConfig {
                     .logoutSuccessUrl("/login?logout")
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID"));
+
+
 
         } catch (Exception e) {
             System.out.println("Security Exception!: " + e.getMessage());

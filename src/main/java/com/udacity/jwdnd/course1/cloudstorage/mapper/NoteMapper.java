@@ -10,7 +10,7 @@ import java.util.List;
 public interface NoteMapper {
 
     //CREATE
-    @Insert("INSERT INTO NOTES (notetitle, notedescription, userid"+"" +
+    @Insert("INSERT INTO NOTES (notetitle, notedescription, userid)"+"" +
             "VALUES(#{notetitle}, #{notedescription}, #{userid})")
     @Options(useGeneratedKeys = true, keyProperty = "noteid")
     Integer createNote(NoteModel noteModel);

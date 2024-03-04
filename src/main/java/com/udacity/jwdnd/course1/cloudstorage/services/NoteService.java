@@ -17,23 +17,23 @@ public class NoteService {
         this.noteMapper = noteMapper;
     }
 
-    Integer createNote(NoteModel note){
-        return noteMapper.createNote(note);
+    public Integer createNote(NoteModel note){
+        return noteMapper.createNote(new NoteModel(null,note.getNotetitle(),note.getNotedescription(),userService.getCurrentUser().getUserid()));
     }
 
-    Integer changeNote(NoteModel note){
+    public Integer changeNote(NoteModel note){
         return noteMapper.updateNote(note);
     }
 
-    List<NoteModel> getAllUserNotes(){
+    public List<NoteModel> getAllUserNotes(){
         return noteMapper.getAllUserNotes(userService.getCurrentUser().getUserid().toString());
     }
 
-    NoteModel getNote(String noteid){
+    public NoteModel getNote(String noteid){
         return noteMapper.getNote(noteid, userService.getCurrentUser().getUserid().toString());
     }
 
-    boolean deleteNote(String noteid){
+    public boolean deleteNote(String noteid){
         try {
             noteMapper.deleteNote(userService.getCurrentUser().getUserid().toString(), noteid);
             return true;

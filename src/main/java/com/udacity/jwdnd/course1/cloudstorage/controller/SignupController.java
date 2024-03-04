@@ -30,7 +30,6 @@ public class SignupController {
 
 
 
-        //TODO abfrage implementieren + Wenn verfügbar user erstellen
         if (userService.isUserAvailable(user.getUsername()) != false) {
             if (userService.createUser(user) != null) {
                 model.addAttribute("success", true);

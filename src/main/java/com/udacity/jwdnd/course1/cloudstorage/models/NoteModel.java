@@ -9,6 +9,12 @@ public class NoteModel {
     String notedescription;
     Integer userid;
 
+    public NoteModel(Integer noteid, String notetitle, String notedescription, Integer userid) {
+        this.noteid = noteid;
+        this.notetitle = notetitle;
+        this.notedescription = notedescription;
+        this.userid = userid;
+    }
 
     public Integer getNoteid() {
         return noteid;
