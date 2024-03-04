@@ -6,6 +6,7 @@ import com.udacity.jwdnd.course1.cloudstorage.models.UserModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -19,12 +20,11 @@ public class UserService {
     UserMapper userMapper;
     HashService hashService;
 
-    Authentication authentication;
 
-    public UserService(UserMapper userMapper, HashService hashService, Authentication authentication) {
+
+    public UserService(UserMapper userMapper, HashService hashService ) {
         this.userMapper = userMapper;
         this.hashService = hashService;
-        this.authentication = authentication;
     }
 
 
@@ -48,9 +48,14 @@ public class UserService {
 
     //returns current Logged In User
 
-    @Bean
+
     public UserModel getCurrentUser() {
-        if (authentication.isAuthenticated()) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+
+
+        if (authentication != null && authentication.isAuthenticated()) {
             String username = authentication.getName();
             if (username != null) {
                 UserModel currentUser = userMapper.getUser(username);
