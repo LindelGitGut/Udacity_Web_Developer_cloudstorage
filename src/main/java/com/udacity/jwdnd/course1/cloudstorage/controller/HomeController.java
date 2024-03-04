@@ -62,8 +62,7 @@ public class HomeController {
     // End Fileupload
 
 
-    @GetMapping
-    @RequestMapping("/home")
+    @GetMapping("/home")
     String getHomepage(Model model, @RequestParam(value = "deletefile", required = false) String deleteFileID) {
 
 
@@ -80,8 +79,8 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping
-    @RequestMapping("/home/download")
+    @GetMapping("/home/download")
+
     ResponseEntity getDownload(@RequestParam(value = "downloadfile", required = false) String downloadFileID) {
 
         if (downloadFileID != null) {
