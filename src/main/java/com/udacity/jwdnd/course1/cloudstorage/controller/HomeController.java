@@ -55,7 +55,6 @@ public class HomeController {
             }
         }
 
-
         //TODO Remove Home as placeholder
         return "home";
     }
