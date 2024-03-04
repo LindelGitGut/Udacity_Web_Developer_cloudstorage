@@ -21,7 +21,9 @@ public class FileService {
 
     public Integer createFile(FileModel file){
         UserModel user = userService.getCurrentUser();
-        return fileMapper.createFile(new FileModel(null,file.getFilename(),file.getContenttype(),file.getFilesize(),user.getUserid(), file.getBLOB()));
+
+        System.out.println("DEbug FileService Create File: " + file.getFilename());
+        return fileMapper.createFile(new FileModel(null,file.getFilename(),file.getContenttype(),file.getFilesize(),user.getUserid(), file.getFiledata()));
     }
 
     public FileModel getFile(String fileid){

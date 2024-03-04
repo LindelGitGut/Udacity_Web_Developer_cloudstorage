@@ -1,7 +1,5 @@
 package com.udacity.jwdnd.course1.cloudstorage.models;
 
-import java.io.File;
-
 public class FileModel {
 
     //TODO check if custom Constructor is needed
@@ -14,15 +12,15 @@ public class FileModel {
 
 
     //TODO Check if File is the Righ Datatype corresponding to BloB (see schema.sql)
-    File BLOB;
+    byte[] filedata;
 
-    public FileModel(Integer fileId, String filename, String contenttype, String filesize, Integer userid, File BLOB) {
+    public FileModel(Integer fileId, String filename, String contenttype, String filesize, Integer userid, byte[] BLOB) {
         this.fileId = fileId;
         this.filename = filename;
         this.contenttype = contenttype;
         this.filesize = filesize;
         this.userid = userid;
-        this.BLOB = BLOB;
+        this.filedata = BLOB;
     }
 
     public Integer getFileId() {
@@ -65,11 +63,11 @@ public class FileModel {
         this.userid = userid;
     }
 
-    public File getBLOB() {
-        return BLOB;
+    public byte[] getFiledata() {
+        return filedata;
     }
 
-    public void setBLOB(File BLOB) {
-        this.BLOB = BLOB;
+    public void setFiledata(byte[] filedata) {
+        this.filedata = filedata;
     }
 }

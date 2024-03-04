@@ -11,8 +11,8 @@ public interface FileMapper {
     //TODO check sanity
 
     //CREATE
-    @Insert("INSERT INTO FILES (filename, contenttype, filesize, userid, BLOB)"+
-    "VALUES(#{filename}, #{contenttype}, #{filesize}, #{userid}, #{BLOB})")
+    @Insert("INSERT INTO FILES (filename, contenttype, filesize, userid, filedata)"+
+    "VALUES(#{filename}, #{contenttype}, #{filesize}, #{userid}, #{filedata})")
     Integer createFile(FileModel file);
 
     //READ
@@ -20,7 +20,7 @@ public interface FileMapper {
     FileModel getFile(String fileId, String userid);
 
     //UPDATE
-    @Update("UPDATE FILES SET (fileId = #{fileId}, filename = #{filename}, conetenttype = #{contenttype}, filesize = #{filesize}, userid = #{userID}, BLOB = #{BLOB})")
+    @Update("UPDATE FILES SET (fileId = #{fileId}, filename = #{filename}, conetenttype = #{contenttype}, filesize = #{filesize}, userid = #{userID}, filedata = #{filedata})")
     Integer updateFile(FileModel file, String userID);
 
     //REMOVE
