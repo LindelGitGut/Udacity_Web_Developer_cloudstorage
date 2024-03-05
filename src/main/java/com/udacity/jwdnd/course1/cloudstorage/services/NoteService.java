@@ -22,10 +22,7 @@ public class NoteService {
     }
 
     public Integer changeNote(NoteModel note){
-
-        //Debug
         note.setUserid(userService.getCurrentUser().getUserid());
-
         return noteMapper.updateNote(note);
     }
 
@@ -37,15 +34,8 @@ public class NoteService {
         return noteMapper.getNote(noteid, userService.getCurrentUser().getUserid().toString());
     }
 
-    public boolean deleteNote(String noteid){
-        try {
-            noteMapper.deleteNote(userService.getCurrentUser().getUserid().toString(), noteid);
-            return true;
-        }
-        catch (Exception e){
-            return false;
-        }
-
+    public Integer deleteNote(String noteid){
+            return noteMapper.deleteNote(userService.getCurrentUser().getUserid().toString(), noteid);
     }
 
 }

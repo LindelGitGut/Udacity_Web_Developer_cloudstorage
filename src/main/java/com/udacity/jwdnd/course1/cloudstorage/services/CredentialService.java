@@ -21,6 +21,7 @@ public class CredentialService {
     }
 
     public Integer createCredential(CredentialModel credentialModel){
+        //TODO Add Encryption
         credentialModel.setUserid(userService.getCurrentUser().getUserid());
         return credentialsMapper.createCredential(credentialModel);
     }

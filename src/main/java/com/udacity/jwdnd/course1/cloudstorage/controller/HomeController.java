@@ -108,65 +108,44 @@ public class HomeController {
     @PostMapping("/home/note")
     String addNote(Model model, @ModelAttribute("noteModel") NoteModel noteModel, @RequestParam(value = "edit", required = false) boolean edit){
 
-        System.out.println("Debug Note Controller Notemodel: " +noteModel.getNotetitle() + "Inhalt:" +noteModel.getNotedescription());
-
 
         if (noteModel.getNoteid() == null){
             //Create new Note
-            System.out.println("Controller Keine Note ID");
             noteService.createNote(noteModel);
         }
-
         else {
             //Modify Note
             System.out.println("Controller Note ID vorhanden: " + noteModel.getNoteid());
             if (noteService.changeNote(noteModel)==0){
                 System.out.println("Note wurde nicht richtig aktuallisiert");
+
+                //TODO return errormsg
             }
             else {
-                System.out.println("Note wurde aktualisiert");
+                //TODO return successmsg
             }
         }
-        // Edit File
-
-
-
-        //DEBUG
-
-        List<NoteModel> allNotes = noteService.getAllUserNotes();
-
-        if (allNotes.isEmpty()){
-            System.out.println("NoteListe ist leer get funktion überprüfen!");
-        }
-
-        for (NoteModel note: allNotes
-             ) {
-            System.out.println("Debug Notes Controller: Bezeichnung:" + note.getNotetitle() + " Inhalt: " +note.getNotedescription() );
-
-        }
-
-
-
-
-
         model.addAttribute("allNotes", noteService.getAllUserNotes());
-
-
         return "home";
     }
 
     @GetMapping("/home/note")
     String getNote(@ModelAttribute("noteModel") NoteModel noteModel, Model model, @RequestParam(value = "deleteNoteID", required = false) String deleteNoteID){
 
-        //Edit Note
-
+        //DELETE Note if Null
         if(deleteNoteID != null){
-            System.out.println("Debug deleteNoteID: " + deleteNoteID);
-            noteService.deleteNote(deleteNoteID);
-        }
+          //  System.out.println("Debug deleteNoteID: " + deleteNoteID);
+            if(noteService.deleteNote(deleteNoteID) == 0){
+                model.addAttribute("error", "Could not Delete Note, please try again!");
+            }
+            else{
+                model.addAttribute("success", "Note Successfully deleted!");
+                //TODO return successmsg
+                }
+            }
 
         model.addAttribute("allNotes", noteService.getAllUserNotes());
-        //TODO abfragen ob erfolgreich oder nicht und entsprechend der result Page anzeigen
+
 
         return "home";
     }
