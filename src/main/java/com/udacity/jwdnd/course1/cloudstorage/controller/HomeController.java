@@ -4,10 +4,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.models.CredentialModel;
 import com.udacity.jwdnd.course1.cloudstorage.models.FileModel;
 import com.udacity.jwdnd.course1.cloudstorage.models.NoteModel;
-import com.udacity.jwdnd.course1.cloudstorage.services.CredentialService;
-import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
-import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
-import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import com.udacity.jwdnd.course1.cloudstorage.services.*;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,14 +24,16 @@ public class HomeController {
     UserService userService;
     FileService fileService;
     NoteService noteService;
-
     CredentialService credentialService;
 
-    public HomeController(UserService userService, FileService fileService, NoteService noteService, CredentialService credentialService) {
+    EncryptionService encryptionService;
+
+    public HomeController(UserService userService, FileService fileService, NoteService noteService, CredentialService credentialService, EncryptionService encryptionService) {
         this.userService = userService;
         this.fileService = fileService;
         this.noteService = noteService;
         this.credentialService = credentialService;
+        this.encryptionService = encryptionService;
     }
 
     //handling File Upload
@@ -46,6 +45,7 @@ public class HomeController {
 
         model.addAttribute("allCreds", credentialService.getAllUserCredentials());
         model.addAttribute("allNotes", noteService.getAllUserNotes());
+        model.addAttribute("encryptionService", encryptionService);
         if (file != null) {
             // Fileupload
             String filename = file.getOriginalFilename();
@@ -79,6 +79,7 @@ public class HomeController {
 
         model.addAttribute("allNotes", noteService.getAllUserNotes());
         model.addAttribute("allCreds", credentialService.getAllUserCredentials());
+        model.addAttribute("encryptionService", encryptionService);
         if (deleteFileID != null) {
             //TODO Add cheack if File was Successfull or unsucessfull deleted, Foreward to Result Page
 
@@ -158,7 +159,7 @@ public class HomeController {
     @GetMapping("/home/credential")
     String getCredentials(@ModelAttribute("credentialModel") CredentialModel credentialModel,
                           Model model, @RequestParam(value = "deleteCredentialID", required = false) String deleteCredentialID) {
-
+        model.addAttribute("encryptionService", encryptionService);
         System.out.println("DELETE getriggert");
         System.out.println(deleteCredentialID != null);
         //DELETE Credential if not null
@@ -180,6 +181,8 @@ public class HomeController {
     @PostMapping("/home/credential")
     String createCredentials(@ModelAttribute("credentialModel") CredentialModel credentialModel,
                           Model model) {
+
+        model.addAttribute("encryptionService", encryptionService);
         //Change Credential if id is not null
         if (credentialModel.getCredentialid() != null){
             System.out.println("Credential id for chaching: "+ credentialModel.getCredentialid());

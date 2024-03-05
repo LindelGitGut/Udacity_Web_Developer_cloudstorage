@@ -39,10 +39,10 @@ public class CredentialService {
         String userid = userService.getCurrentUser().getUserid().toString();
         List<CredentialModel> allCreds = credentialsMapper.getallUserCredentials(userid);
 
-        for (CredentialModel currentcred: allCreds
+        /*for (CredentialModel currentcred: allCreds
              ) {
             currentcred.setPassword(encryptionService.decryptValue(currentcred.getPassword(),currentcred.getKey()));
-        }
+        }*/
 
         return allCreds;
     }
