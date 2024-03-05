@@ -19,12 +19,10 @@ public interface CredentialsMapper {
 
     */
 
-
-
     // Create
     @Insert("INSERT INTO CREDENTIALS(url,username,key,password,userid) VALUES(#{url},#{username},#{key},#{password},#{userid})")
     @Options(useGeneratedKeys = true, keyProperty = "credentialid")
-    Integer createCredentials(CredentialModel credentialModel);
+    Integer createCredential(CredentialModel credentialModel);
 
 
     //Read
@@ -32,7 +30,7 @@ public interface CredentialsMapper {
     CredentialModel getCredential(String credentialid, String userid);
 
     @Select("SELECT * FROM CREDENTIALS where userid = #{userid}")
-    List<CredentialModel> getallUserCredentials(String credentialid, String userid);
+    List<CredentialModel> getallUserCredentials(String userid);
     //UPDATE
     @Update("UPDATE CREDENTIALS SET credentialid = #{credentialid} ,url=#{url},username = #{username},key = #{key},password = #{password},userid = #{userid}" +
             "WHERE userid = #{userid} AND credentialid = #{credentialid}")
