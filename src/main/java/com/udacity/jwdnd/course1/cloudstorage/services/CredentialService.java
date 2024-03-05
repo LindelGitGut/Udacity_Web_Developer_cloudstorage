@@ -21,22 +21,35 @@ public class CredentialService {
     }
 
     public Integer createCredential(CredentialModel credentialModel){
-        //TODO Add Encryption
+        credentialModel.setKey(encryptionService.generateKey());
         credentialModel.setUserid(userService.getCurrentUser().getUserid());
+        credentialModel.setPassword(encryptionService.encryptValue(credentialModel.getPassword(),credentialModel.getKey()));
         return credentialsMapper.createCredential(credentialModel);
     }
 
     public CredentialModel getCredential(String credentialid){
         String userid = userService.getCurrentUser().getUserid().toString();
-        return credentialsMapper.getCredential(credentialid,userid);
+        CredentialModel cryptCred = credentialsMapper.getCredential(credentialid,userid);
+        cryptCred.setPassword(encryptionService.decryptValue(cryptCred.getPassword(),cryptCred.getKey()));
+        return cryptCred;
     }
 
     public List<CredentialModel> getAllUserCredentials(){
+
         String userid = userService.getCurrentUser().getUserid().toString();
-        return credentialsMapper.getallUserCredentials(userid);
+        List<CredentialModel> allCreds = credentialsMapper.getallUserCredentials(userid);
+
+        for (CredentialModel currentcred: allCreds
+             ) {
+            currentcred.setPassword(encryptionService.decryptValue(currentcred.getPassword(),currentcred.getKey()));
+        }
+
+        return allCreds;
     }
 
     public Integer changeCredential(CredentialModel credentialModel){
+        credentialModel.setKey(encryptionService.generateKey());
+        credentialModel.setPassword(encryptionService.encryptValue(credentialModel.getPassword(),credentialModel.getKey()));
         credentialModel.setUserid(userService.getCurrentUser().getUserid());
         return credentialsMapper.changeCredential(credentialModel);
     }
