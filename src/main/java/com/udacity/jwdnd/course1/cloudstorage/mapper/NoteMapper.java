@@ -26,7 +26,7 @@ public interface NoteMapper {
 
     //UPDATE
 
-    @Update("UPDATE NOTES SET (noteid = #{noteid}, notetitle = #{notetitle}, notedescription = #{notedescription}, userid = #{userid})")
+    @Update("UPDATE NOTES SET noteid = #{noteid}, notetitle = #{notetitle}, notedescription = #{notedescription}, userid = #{userid} WHERE userid = #{userid} AND noteid = #{noteid}")
     Integer updateNote(NoteModel noteModel);
 
     //DELETE

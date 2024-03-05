@@ -106,12 +106,30 @@ public class HomeController {
     //NOTES
 
     @PostMapping("/home/note")
-    String addNote(Model model, @ModelAttribute("noteModel") NoteModel noteModel){
+    String addNote(Model model, @ModelAttribute("noteModel") NoteModel noteModel, @RequestParam(value = "edit", required = false) boolean edit){
 
         System.out.println("Debug Note Controller Notemodel: " +noteModel.getNotetitle() + "Inhalt:" +noteModel.getNotedescription());
 
-        //TODO add checks
-        noteService.createNote(noteModel);
+
+        if (noteModel.getNoteid() == null){
+            //Create new Note
+            System.out.println("Controller Keine Note ID");
+            noteService.createNote(noteModel);
+        }
+
+        else {
+            //Modify Note
+            System.out.println("Controller Note ID vorhanden: " + noteModel.getNoteid());
+            if (noteService.changeNote(noteModel)==0){
+                System.out.println("Note wurde nicht richtig aktuallisiert");
+            }
+            else {
+                System.out.println("Note wurde aktualisiert");
+            }
+        }
+        // Edit File
+
+
 
         //DEBUG
 
@@ -126,6 +144,10 @@ public class HomeController {
             System.out.println("Debug Notes Controller: Bezeichnung:" + note.getNotetitle() + " Inhalt: " +note.getNotedescription() );
 
         }
+
+
+
+
 
         model.addAttribute("allNotes", noteService.getAllUserNotes());
 

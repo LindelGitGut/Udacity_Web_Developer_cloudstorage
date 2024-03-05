@@ -22,6 +22,10 @@ public class NoteService {
     }
 
     public Integer changeNote(NoteModel note){
+
+        //Debug
+        note.setUserid(userService.getCurrentUser().getUserid());
+
         return noteMapper.updateNote(note);
     }
 
