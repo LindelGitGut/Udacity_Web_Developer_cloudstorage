@@ -12,6 +12,10 @@ public class CredentialModel {
     Integer userid;
 
     public Integer getCredentialid() {
+        //DEBUG
+        System.out.println("Credentialid getriggert: " + this.credentialid);
+
+
         return credentialid;
     }
 

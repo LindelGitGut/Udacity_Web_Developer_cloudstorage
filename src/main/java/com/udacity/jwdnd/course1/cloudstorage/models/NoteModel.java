@@ -17,8 +17,6 @@ public class NoteModel {
     }
 
     public Integer getNoteid() {
-
-        System.out.println("get Noteid: " + noteid);
         return noteid;
     }
 

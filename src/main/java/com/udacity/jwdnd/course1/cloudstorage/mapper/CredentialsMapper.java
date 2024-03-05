@@ -20,7 +20,7 @@ public interface CredentialsMapper {
     */
 
     // Create
-    @Insert("INSERT INTO CREDENTIALS(url,username,key,password,userid) VALUES(#{url},#{username},#{key},#{password},#{userid})")
+    @Insert("INSERT INTO CREDENTIALS(url,username,\"key\",password,userid) VALUES(#{url},#{username},#{key},#{password},#{userid})")
     @Options(useGeneratedKeys = true, keyProperty = "credentialid")
     Integer createCredential(CredentialModel credentialModel);
 
@@ -37,6 +37,6 @@ public interface CredentialsMapper {
     Integer changeCredential(CredentialModel credentialModel);
     //DELETE
     @Delete("DELETE FROM CREDENTIALS WHERE userid = #{userid} AND credentialid = #{credentialid}")
-    Integer deleteCredential(String userid, String credetialid);
+    Integer deleteCredential(String userid, String credentialid);
 
 }

@@ -18,15 +18,10 @@ public class EncryptionService {
     private Logger logger = LoggerFactory.getLogger(EncryptionService.class);
 
     public String generateKey() {
-        try {
-            KeyGenerator keyGen = KeyGenerator.getInstance("AES");
-            keyGen.init(256); // for AES-256
-            SecretKey secretKey = keyGen.generateKey();
-            return Base64.getEncoder().encodeToString(secretKey.getEncoded());
-        } catch (NoSuchAlgorithmException e) {
-            logger.error(e.getMessage());
-            return null;
-        }
+        SecureRandom random = new SecureRandom();
+        byte[] key = new byte[16];
+        random.nextBytes(key);
+        return Base64.getEncoder().encodeToString(key);
     }
 
     public String encryptValue(String data, String key) {
