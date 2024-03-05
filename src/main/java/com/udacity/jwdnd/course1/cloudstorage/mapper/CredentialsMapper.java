@@ -32,7 +32,7 @@ public interface CredentialsMapper {
     @Select("SELECT * FROM CREDENTIALS where userid = #{userid}")
     List<CredentialModel> getallUserCredentials(String userid);
     //UPDATE
-    @Update("UPDATE CREDENTIALS SET credentialid = #{credentialid} ,url=#{url},username = #{username},key = #{key},password = #{password},userid = #{userid}" +
+    @Update("UPDATE CREDENTIALS SET credentialid = #{credentialid} , url = #{url},username = #{username},\"key\" = #{key},password = #{password},userid = #{userid}" +
             "WHERE userid = #{userid} AND credentialid = #{credentialid}")
     Integer changeCredential(CredentialModel credentialModel);
     //DELETE

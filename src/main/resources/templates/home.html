@@ -140,7 +140,9 @@
                                 <tbody>
                                 <tr th:each="cred : ${allCreds}">
                                     <td>
-                                        <button type="button" class="btn btn-success">Edit</button>
+                                        <button type="button" class="btn btn-success"
+                                                th:attr="data-cred-id=${cred.getCredentialid()}, data-cred-url=${cred.getUrl()}, data-cred-username=${cred.getUsername()}, data-cred-password=${cred.getPassword()}"
+                                                th:onclick="showCredentialModal(this.getAttribute('data-cred-id'), this.getAttribute('data-cred-username') ,this.getAttribute('data-cred-url'), this.getAttribute('data-cred-password'))">Edit</button>
                                         <a class="btn btn-danger" th:href="@{/home/credential(deleteCredentialID=${cred.getCredentialid()})}">Delete</a>
                                     </td>
                                     <th scope="row" th:text="${cred.getUrl()}">Example Credential URL</th>
@@ -162,7 +164,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <form action="#" method="POST" th:object="${credentialModel}" th:action="@{home/credential}">
-                                            <input type="hidden" name="credentialId" id="credential-id">
+                                            <input type="hidden" name="credentialId" id="credential-id" th:field="*{credentialid}">
                                             <div class="form-group">
                                                 <label for="credential-url" class="col-form-label">URL</label>
                                                 <input type="text" name= "url" class="form-control" id="credential-url" maxlength="100" required th:field="*{url}">

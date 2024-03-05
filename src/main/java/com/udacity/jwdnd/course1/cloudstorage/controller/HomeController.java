@@ -145,10 +145,10 @@ public class HomeController {
         if (deleteNoteID != null) {
             //  System.out.println("Debug deleteNoteID: " + deleteNoteID);
             if (noteService.deleteNote(deleteNoteID) == 0) {
-                model.addAttribute("error", "Could not Delete Note, please try again!");
+                model.addAttribute("error", true);
+                model.addAttribute("errormsg", "Could not Delete Note, please try again!");
             } else {
-                model.addAttribute("success", "Note Successfully deleted!");
-                //TODO return successmsg
+                model.addAttribute("success", true);
             }
         }
         model.addAttribute("allNotes", noteService.getAllUserNotes());
@@ -173,7 +173,6 @@ public class HomeController {
                 model.addAttribute("success", true);
             }
         }
-        model.addAttribute("errormsg", "Error deleting Credential, please try again");
 
         return "result";
     }
@@ -183,6 +182,7 @@ public class HomeController {
                           Model model) {
         //Change Credential if id is not null
         if (credentialModel.getCredentialid() != null){
+            System.out.println("Credential id for chaching: "+ credentialModel.getCredentialid());
             if(credentialService.changeCredential(credentialModel) == 0){
                 model.addAttribute("errormsg", "Error changing Credential, please try again");}
             else {model.addAttribute("success", "Credential successfully added!");}
