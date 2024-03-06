@@ -5,8 +5,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
+@EnableWebSecurity
 @Configuration
 public class SecurityConfig {
 
@@ -39,6 +42,12 @@ public class SecurityConfig {
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID"));
 
+            //exception handling wrong url
+
+            //http.exceptionHandling(except -> except.authenticationEntryPoint(authenticationEntryPoint()));
+
+
+
 
 
         } catch (Exception e) {
@@ -46,5 +55,12 @@ public class SecurityConfig {
         }
 
         return http.build();
+    }
+
+    private AuthenticationEntryPoint authenticationEntryPoint() {
+        return (request, response, authException) -> {
+            // Umleiten zur Login-Seite
+            response.sendRedirect("/login");
+        };
     }
 }

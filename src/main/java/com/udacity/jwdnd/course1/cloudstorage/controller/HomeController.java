@@ -141,6 +141,7 @@ public class HomeController {
 
     @GetMapping("/home/note")
     String getNote(@ModelAttribute("noteModel") NoteModel noteModel,
+                   @ModelAttribute("credentialModel") CredentialModel credentialModel,
                    Model model, @RequestParam(value = "deleteNoteID", required = false) String deleteNoteID) {
         //DELETE Note if Null
         if (deleteNoteID != null) {
