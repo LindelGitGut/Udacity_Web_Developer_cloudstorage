@@ -7,6 +7,7 @@ import com.udacity.jwdnd.course1.cloudstorage.models.NoteModel;
 import com.udacity.jwdnd.course1.cloudstorage.services.*;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -109,16 +110,16 @@ public class HomeController {
         if (downloadFileID != null) {
             FileModel downloadfile = fileService.getFile(downloadFileID);
             if (downloadfile == null) {
-                return ResponseEntity.notFound().build();
+                return new ResponseEntity<>("Could not download File, please try again.", HttpStatus.NOT_FOUND);
             } else {
-                System.out.println("Debug Download File, File gefunden");
                 return ResponseEntity.ok()
                         .contentType(MediaType.parseMediaType(downloadfile.getContenttype()))
                         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + downloadfile.getFilename() + "\"")
                         .body(new ByteArrayResource(downloadfile.getFiledata()));
             }
         }
-        return ResponseEntity.notFound().build();
+         return new ResponseEntity<>("No File ID found in Request, please try again.", HttpStatus.NOT_FOUND);
+
     }
 
     //NOTES
