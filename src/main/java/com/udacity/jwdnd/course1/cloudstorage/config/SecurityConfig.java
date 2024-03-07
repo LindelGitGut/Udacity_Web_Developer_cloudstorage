@@ -35,7 +35,7 @@ public class SecurityConfig {
             );
 
 
-            //redirection to login Page TODO check whhich parameter should be set
+
             http.logout(logout -> logout
                     .logoutUrl("/logout")
                     .logoutSuccessUrl("/login?logout")

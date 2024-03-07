@@ -14,8 +14,6 @@ public interface UserMapper {
     int insertUser(UserModel user);
 
 
-
-    //TODO Check if User or Integer Userid should be used
     //DELETE
     @Delete("DELETE * FROM USERS WHERE username = #{username}")
     void deleteUser(String username);

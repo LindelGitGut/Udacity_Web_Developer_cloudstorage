@@ -33,6 +33,4 @@ public interface NoteMapper {
     @Delete("DELETE FROM NOTES WHERE userid= #{userid} AND noteid = #{noteid}")
     Integer deleteNote(String userid, String noteid);
 
-
-    //TODO Implement Mapper
 }

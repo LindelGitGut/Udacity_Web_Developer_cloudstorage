@@ -3,7 +3,6 @@ package com.udacity.jwdnd.course1.cloudstorage.models;
 public class NoteModel {
 
 
-    //TODO Check if custom Constructor is needed
     Integer noteid;
     String notetitle;
     String notedescription;
