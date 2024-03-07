@@ -58,8 +58,9 @@ public class HomeController {
             Integer userid = userService.getCurrentUser().getUserid();
             byte[] BLOB = file.getBytes();
 
-            if (fileService.createFile(new FileModel(null, filename, contentype, filesize, userid, BLOB)) != null) {
+            if (fileService.createFile(new FileModel(null, filename, contentype, filesize, userid, BLOB)) != null)
 
+            {
                 model.addAttribute("allFiles", fileService.getCurretUserFiles());
                 model.addAttribute("success", true);
                 return "result";

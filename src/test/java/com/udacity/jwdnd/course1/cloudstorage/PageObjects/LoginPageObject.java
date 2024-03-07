@@ -14,6 +14,8 @@ public class LoginPageObject {
         PageFactory.initElements(webDriver, this);
     }
 
+    @FindBy(tagName = "title")
+    WebElement title;
 
     @FindBy(css = ".alert.alert-danger")
     WebElement invalidCredentialsMessage;
@@ -62,6 +64,13 @@ public class LoginPageObject {
         try{return this.logoutMessage.getText();}
         catch (Exception e){return null;}
 
+    }
+
+    public String getTitle(){
+        try{ return title.getAttribute("innerText");}
+        catch (Exception e){
+            System.out.println("Error getting Loginpage Title: " + e.getMessage());
+            return null;}
     }
 
 }
