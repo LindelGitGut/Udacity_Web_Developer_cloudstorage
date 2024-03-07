@@ -142,7 +142,7 @@
                                     <td>
                                         <button type="button" class="btn btn-success"
                                                 th:attr="data-cred-id=${cred.getCredentialid()}, data-cred-url=${cred.getUrl()}, data-cred-username=${cred.getUsername()}, data-cred-password=${encryptionService.decryptValue(cred.getPassword(),cred.getKey())}"
-                                                th:onclick="showCredentialModal(this.getAttribute('data-cred-id'), this.getAttribute('data-cred-username') ,this.getAttribute('data-cred-url'), this.getAttribute('data-cred-password'))">Edit</button>
+                                                th:onclick="showCredentialModal(this.getAttribute('data-cred-id'), this.getAttribute('data-cred-url'), this.getAttribute('data-cred-username') , this.getAttribute('data-cred-password'))">Edit</button>
                                         <a class="btn btn-danger" th:href="@{/home/credential(deleteCredentialID=${cred.getCredentialid()})}">Delete</a>
                                     </td>
                                     <th scope="row" th:text="${cred.getUrl()}">Example Credential URL</th>
@@ -181,7 +181,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" id = "CredentialCancelButton" data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary" onclick="$('#credentialSubmit').click();">Save changes</button>
                                     </div>
                                 </div>

@@ -76,10 +76,10 @@ public class HomePageObject {
     @FindBy(id = "credential-password")
     public WebElement credentialPasswordInput;
 
-    @FindBy(xpath = "//button[contains(text(), 'Save changes')]")
+    @FindBy(xpath = "//button[@onclick=\"$('#credentialSubmit').click();\"]")
     public WebElement credentialSubmitButton;
 
-    @FindBy(xpath = "//button[contains(text(), 'Close')]")
+    @FindBy(id = "CredentialCancelButton")
     public WebElement credentialCancelEditButton;
 
     @FindBy(id = "credentialTable")
@@ -195,7 +195,7 @@ public class HomePageObject {
         return this.credentialUrlInput.getAttribute("value");
     }
 
-    public String getCredntialUsername(){
+    public String getCredentialUsername(){
         return this.credentialUsernameInput.getAttribute("value");
     }
 
@@ -207,7 +207,7 @@ public class HomePageObject {
         this.credentialSubmitButton.click();
     }
 
-    public void clockCredentialCancelButton(){
+    public void clickCredentialCancelButton(){
         this.credentialCancelEditButton.click();
     }
 
@@ -218,13 +218,13 @@ public class HomePageObject {
         return !matchingTitles.isEmpty();
     }
     public boolean checkCredentialTableContainsUsername(String username){
-        List<WebElement> matchingTitles = this.noteTable.findElements(By.xpath(".//td[contains(text(),'" + username + "')]"));
+        List<WebElement> matchingTitles = this.credentialTable.findElements(By.xpath(".//td[contains(text(),'" + username + "')]"));
         // Prüfung, ob die Liste der Elemente, die den Kriterien entsprechen, leer ist oder nicht
         return !matchingTitles.isEmpty();
     }
 
     public boolean checkCredentialTableContainsNotClearPassword(String password){
-        List<WebElement> matchingTitles = this.noteTable.findElements(By.xpath(".//td[contains(text(),'" + password + "')]"));
+        List<WebElement> matchingTitles = this.credentialTable.findElements(By.xpath(".//td[contains(text(),'" + password + "')]"));
         // Prüfung, ob die Liste der Elemente, die den Kriterien entsprechen, leer ist oder nicht
         return matchingTitles.isEmpty();
     }
